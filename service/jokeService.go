@@ -49,8 +49,8 @@ func MakeUrl() string {
 	FirstName = result.FirstName
 	LastName = result.LastName
 
-	nullUrl := fmt.Sprintf("http://api.icndb.com/jokes/random?firstName=" + FirstName + "&lastName=" + LastName + "&limitTo=nerdy")
-	return nullUrl
+	Url := "http://api.icndb.com/jokes/random?firstName=" + FirstName + "&lastName=" + LastName + "&limitTo=nerdy"
+	return Url
 }
 func NameAndSurname() []byte {
 	url := "https://names.mcquay.me/api/v0/"
