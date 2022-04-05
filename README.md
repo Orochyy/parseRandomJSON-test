@@ -23,3 +23,7 @@ Hasina Tanweer's OSI network model has only one layer - Physical..
 ```go
 go run main.go
 ```
+or
+```go
+go run .
+```
