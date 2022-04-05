@@ -10,15 +10,12 @@ import (
 
 type JokeService interface {
 	ParseJokeNameStruct() string
-	ParseJoke() []byte
-	MakeUrl() string
-	NameAndSurname() []byte
 }
 
 func ParseJokeNameStruct() string {
 	var result dto.NameJoke
 	var lastJoke string
-	json.Unmarshal(ParseJoke(), &result)
+	json.Unmarshal(parseJoke(), &result)
 
 	lastJoke = result.Value.Joke
 
@@ -27,8 +24,8 @@ func ParseJokeNameStruct() string {
 	return response
 }
 
-func ParseJoke() []byte {
-	url := MakeUrl()
+func parseJoke() []byte {
+	url := makeUrl()
 	req, _ := http.NewRequest("GET", url, nil)
 
 	req.Header.Add("Content-Type", "application/json")
@@ -41,10 +38,10 @@ func ParseJoke() []byte {
 	return body
 }
 
-func MakeUrl() string {
+func makeUrl() string {
 	var result dto.User
 	var FirstName, LastName string
-	json.Unmarshal(NameAndSurname(), &result)
+	json.Unmarshal(nameAndSurname(), &result)
 
 	FirstName = result.FirstName
 	LastName = result.LastName
@@ -52,7 +49,7 @@ func MakeUrl() string {
 	Url := "http://api.icndb.com/jokes/random?firstName=" + FirstName + "&lastName=" + LastName + "&limitTo=nerdy"
 	return Url
 }
-func NameAndSurname() []byte {
+func nameAndSurname() []byte {
 	url := "https://names.mcquay.me/api/v0/"
 
 	req, _ := http.NewRequest("GET", url, nil)
