@@ -26,14 +26,17 @@ func ParseJokeNameStruct() string {
 
 func parseJoke() []byte {
 	url := makeUrl()
-	req, _ := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", url, nil)
 
 	req.Header.Add("Content-Type", "application/json")
 
-	res, _ := http.DefaultClient.Do(req)
+	res, err := http.DefaultClient.Do(req)
 
 	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Errorf("Second %d API broken", url)
+	}
 
 	return body
 }
@@ -52,14 +55,17 @@ func makeUrl() string {
 func nameAndSurname() []byte {
 	url := "https://names.mcquay.me/api/v0/"
 
-	req, _ := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", url, nil)
 
 	req.Header.Add("Content-Type", "application/json")
 
-	res, _ := http.DefaultClient.Do(req)
+	res, err := http.DefaultClient.Do(req)
 
 	defer res.Body.Close()
 	body, _ := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Errorf("problems with %d API", url)
+	}
 
 	return body
 }
