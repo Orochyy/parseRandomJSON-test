@@ -66,6 +66,5 @@ func nameAndSurname() []byte {
 	if err != nil {
 		fmt.Errorf("problems with %d API", url)
 	}
-
 	return body
 }
